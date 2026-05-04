@@ -54,7 +54,7 @@ sudo service docker start
 ```
 
 Screenshot:
-![alt text](image.png)
+![alt text](images/image.png)
 
 ---
 
@@ -69,9 +69,9 @@ docker rm $(docker ps -aq)
 docker images -q
 docker rmi $(docker images -q)
 ```
-![alt text](image-25.png)
+![alt text](images/image-25.png)
 
-![alt text](image-24.png)
+![alt text](images/image-24.png)
 ---
 
 ## Check Docker Version
@@ -92,7 +92,7 @@ docker pull stacksimplify/retail-store-sample-ui:1.0.0
 ```bash
 docker pull ghcr.io/stacksimplify/retail-store-sample-ui:1.0.0
 ```
-![alt text](image-23.png)
+![alt text](images/image-23.png)
 ---
 
 ## Run Docker Container
@@ -106,7 +106,7 @@ docker run --name app1 -p 8888:8080 -d stacksimplify/retail-store-sample-ui:1.0.
 * `8888` → host port
 
 Screenshot:
-![alt text](image-22.png)
+![alt text](images/image-22.png)
 ---
 
 ## Application Output
@@ -118,7 +118,7 @@ http://localhost:8888
 ```
 
 Screenshot:
-![alt text](image-21.png)
+![alt text](images/image-21.png)
 ---
 
 ## Execute Commands Inside Container
@@ -130,13 +130,13 @@ docker exec -it app1 env
 ```
 
 Screenshot:
-![alt text](image-19.png)
+![alt text](images/image-19.png)
 
-![alt text](image-20.png)
+![alt text](images/image-20.png)
 
-![alt text](image-18.png)
+![alt text](images/image-18.png)
 
-![alt text](image-17.png)
+![alt text](images/image-17.png)
 
 ---
 
@@ -148,7 +148,7 @@ docker start app1
 docker rm app1
 docker rmi <image-id>
 ```
-![alt text](image-16.png)
+![alt text](images/image-16.png)
 
 ---
 
@@ -161,9 +161,9 @@ cd demo-docker-build
 wget https://github.com/aws-containers/retail-store-sample-app/archive/refs/tags/v1.4.2.zip
 unzip v1.4.2.zip
 ```
-![alt text](image-15.png)
+![alt text](images/image-15.png)
 
-![alt text](image-14.png)
+![alt text](images/image-14.png)
 ---
 
 ## Modify Application Code
@@ -172,7 +172,7 @@ unzip v1.4.2.zip
 sed -i 's/Secret Shop<\/span>/No more Secret Shop<\/span>/' home.html
 grep 'Secret Shop' home.html
 ```
-![alt text](image-13.png)
+![alt text](images/image-13.png)
 ---
 
 ## Build Docker Image
@@ -182,7 +182,7 @@ docker build -t retail-store-sample-ui:2.0.0 .
 ```
 
 Screenshot:
-![alt text](image-12.png))
+![alt text](images/image-12.png)
 
 ---
 
@@ -194,14 +194,14 @@ docker push jenil83/devops-project-bootcamp:2.0.0
 ```
 
 Screenshots:
-![alt text](image-11.png)
+![alt text](images/image-11.png)
 
 ### Before Change
 
-![alt text](image-9.png)
+![alt text](images/image-9.png)
 ### After Change
 
-![alt text](image-10.png)
+![alt text](images/image-10.png)
 ---
 
 ## Summary
