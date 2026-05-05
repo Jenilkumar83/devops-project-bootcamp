@@ -1,5 +1,3 @@
-# Retail Store Sample UI - Docker Practical
-
 ## Introduction
 
 * Retail store microservices application
@@ -189,8 +187,8 @@ Screenshot:
 ## Tag and Push to Docker Hub
 
 ```bash
-docker tag retail-store-sample-ui:2.0.0 jenil83/devops-project-bootcamp:2.0.0
-docker push jenil83/devops-project-bootcamp:2.0.0
+docker tag retail-store-sample-ui:2.0.0 <username>/devops-project-bootcamp:2.0.0
+docker push <username>/devops-project-bootcamp:2.0.0
 ```
 
 Screenshots:
@@ -204,6 +202,136 @@ Screenshots:
 ![alt text](images/image-10.png)
 ---
 
+---
+## Introduction to Dockerfile
+
+* Multi-stage Dockerfile
+* Create a non-root user to secure container
+* Use `.dockerignore` to exclude unnecessary files
+* Layer caching for faster builds
+* Use `docker exec` to access running container
+* Rebuild image from scratch using `--no-cache`
+
+---
+
+## Dockerfile Basics
+
+* **FROM** → Base image to build from
+* **RUN** → Execute commands during image build (install packages)
+* **VOLUME** → Create mount point for persistent/shared data (e.g., `/tmp`)
+* **WORKDIR** → Set working directory inside container
+* **COPY** → Copy files from host to image
+* **ENV** → Set environment variables
+* **USER** → Run container as non-root user (security best practice)
+* **EXPOSE** → Define container port
+* **ENTRYPOINT** → Default command when container starts
+
+---
+
+## Multi-Stage Docker Builds
+
+### Build Stage
+
+* Contains:
+
+  * Source code
+  * Build tools (e.g., Maven)
+  * Packages (`which`, `tar`, `gzip`)
+* Purpose:
+
+  * Compile/build application
+* Note:
+
+  * Not included in final image
+
+---
+
+### Package Stage (Final Image)
+
+* Contains:
+
+  * Runtime environment (JDK + app.jar)
+* Does NOT contain:
+
+  * Build tools
+  * Source code
+  * Extra packages
+* Benefits:
+
+  * Lightweight
+  * Faster
+  * More secure
+  * Production-ready
+
+---
+
+## Docker Build Cache Cleanup
+
+```bash
+docker builder prune --all
+```
+![alt text](images/image2.png)
+---
+
+## Build and Run Docker Image
+
+```bash
+docker build -t retail-ui:9.0.0 .
+docker run --name app3 -p 8080:8080 -d retail-ui:9.0.0
+```
+![alt text](images/image3.png)
+![alt text](images/image4.png)
+![alt text](images/image5.png)
+---
+
+## Access Running Container
+
+```bash
+docker exec -it app3 sh
+```
+
+---
+
+## Rebuild Image Without Cache
+
+```bash
+docker build --no-cache -t retail-ui:10.0.0 .
+```
+
+---
+
+## Docker Cleanup Commands
+
+### Remove Build Cache
+
+```bash
+docker builder prune
+docker builder prune -f
+docker builder prune --all
+```
+![alt text](images/image6.png)
+---
+
+### Remove Unused Resources
+
+```bash
+docker system prune
+docker system prune --volumes
+docker system prune -a --volumes
+```
+![alt text](images/image7.png)
+---
+
+### What `docker system prune -a --volumes` removes:
+
+* All stopped containers
+* All unused networks
+* All anonymous volumes not used by containers
+* All unused images (no container attached)
+* All build cache
+
+---
+
 ## Summary
 
 * Installed Docker locally and on EC2
@@ -212,5 +340,8 @@ Screenshots:
 * Executed commands inside container
 * Built custom Docker image
 * Tagged and pushed image to Docker Hub
-
----
+* Understood Dockerfile basics (FROM, RUN, COPY, ENV, USER, ENTRYPOINT)
+* How to used non-root user for improved container security
+* Leveraged Docker layer caching for faster builds
+* Rebuilt images using `--no-cache` option
+* Cleaned up unused Docker resources using prune commands
