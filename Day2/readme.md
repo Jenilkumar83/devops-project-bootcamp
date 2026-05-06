@@ -201,5 +201,20 @@ DOCKER_BUILDKIT=1 docker buildx build \
   -t "${IMAGE}" \
   --push .
 ```
+### Look for entries for linux/amd64 and linux/arm64
+-docker buildx imagetools inspect "${IMAGE}"
+
+![alt text](image-15.png)
+
+-AMD64: Run and test the containers
+![alt text](image-16.png)
+
+# v2 version
+![alt text](image-17.png)
+
+![alt text](image-18.png)
+
+## To check cache size
+- docker system df
 
 ---
