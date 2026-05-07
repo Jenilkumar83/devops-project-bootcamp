@@ -69,7 +69,9 @@ terraform plan -var="key=value"
 * No versioning
 * No state locking
 * Security concerns
+
 ![alt text](image-2.png)
+
 ---
 
 ## Terraform Remote State File
@@ -83,9 +85,11 @@ terraform plan -var="key=value"
 ### Backend Storage
 
 * AWS S3 Bucket
+
 ![alt text](image-3.png)
 
 ![alt text](image-4.png)
+
 ### Important Note
 
 * Variables cannot be used directly in backend block
