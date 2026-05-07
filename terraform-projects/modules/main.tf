@@ -1,4 +1,4 @@
 module "cbb_vpc" {
-  source = "./modules/vpc"
+  source = "./vpc"
   tags   = var.tags
 }

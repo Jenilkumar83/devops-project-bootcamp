@@ -1,4 +1,3 @@
-
 resource "aws_subnet" "public" {
   vpc_id                  = data.aws_vpc.existing.id
   cidr_block              = var.public_subnet_cidr
