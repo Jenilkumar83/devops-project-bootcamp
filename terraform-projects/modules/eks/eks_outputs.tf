@@ -1,36 +1,3 @@
-output "vpc_id" {
-  value = module.cbb_vpc.vpc_id
-}
-
-output "public_subnet_id" {
-  value = module.cbb_vpc.public_subnet_id
-}
-
-output "private_subnet_id" {
-  value = module.cbb_vpc.private_subnet_id
-}
-
-output "internet_gateway_id" {
-  value = module.cbb_vpc.internet_gateway_id
-}
-
-# output "nat_gateway_id" {
-#   value = local.nat_gateway_id
-# }
-
-# output "nat_gateway_details" {
-#   value = data.aws_nat_gateways.nat
-# }
-
-output "route_table_public_id" {
-  value = module.cbb_vpc.route_table_public_id
-}
-
-output "route_table_private_id" {
-  value = module.cbb_vpc.route_table_private_id
-}
-
-#EKS
 # ------------------------------------------------------------------------------
 # Output the EKS Cluster API server endpoint
 # Used by kubectl and external tools to communicate with the cluster
@@ -94,4 +61,13 @@ output "private_node_group_name" {
 output "eks_node_instance_role_arn" {
   value       = aws_iam_role.eks_nodegroup_role.arn
   description = "IAM Role ARN used by EKS node group (EC2 worker nodes)"
+}
+
+# ------------------------------------------------------------------------------
+# Output command to configure kubectl for this EKS cluster
+# Helpful for students to run directly after apply
+# ------------------------------------------------------------------------------
+output "to_configure_kubectl" {
+  description = "Command to update local kubeconfig to connect to the EKS cluster"
+  value       = "aws eks --region ${var.aws_region} update-kubeconfig --name ${local.eks_cluster_name}"
 }
