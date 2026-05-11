@@ -1,0 +1,55 @@
+apiVersion: apps/v1   # apps group in that v1
+kind: Deployment
+metadata:
+  name: catalog
+  labels:
+    app.kubernetes.io/name: catalog
+spec:
+  replicas: 1    # copy of pods
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 1   # ensures that at most one pod can be unavailable during the update
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: catalog
+  template:           # below details from template that will be k8s pod configuration
+    metadata:
+      labels:
+        app.kubernetes.io/name: catalog
+    spec:
+      securityContext:
+        fsGroup: 1000           # non-root user / app user
+      containers:
+        - name: catalog
+          envFrom:
+            - configMapRef:
+                name: catalog
+          securityContext:        # safe and isolated 
+            capabilities:
+              drop:
+              - ALL
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 1000        # app user
+          image: "public.ecr.aws/aws-containers/retail-store-sample-catalog:1.0.0"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+          livenessProbe:           # ongoing-health check, auto restart container, self-healing
+            httpGet:
+              path: /health
+              port: 8080                 
+          resources:
+            limits:
+              cpu: 200m
+              memory: 256Mi
+            requests:
+              cpu: 100m
+              memory: 256Mi
