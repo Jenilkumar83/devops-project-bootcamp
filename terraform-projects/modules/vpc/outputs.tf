@@ -14,13 +14,9 @@ output "internet_gateway_id" {
   value = data.aws_internet_gateway.igw.id
 }
 
-# output "nat_gateway_id" {
-#   value = local.nat_gateway_id
-# }
-
-# output "nat_gateway_details" {
-#   value = data.aws_nat_gateways.nat
-# }
+output "nat_gateway_id" {
+  value = local.nat_gateway_id
+}
 
 output "route_table_public_id" {
   value = aws_route_table.public.id

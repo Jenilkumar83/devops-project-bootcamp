@@ -4,7 +4,7 @@ resource "aws_eks_cluster" "main" {
   role_arn = aws_iam_role.eks_cluster.arn
 
   vpc_config {
-    subnet_ids              = data.terraform_remote_state.cbb_vpc.outputs.private_subnet_id
+    subnet_ids              = [var.public_subnet_id, var.private_subnet_id]
     endpoint_private_access = var.cluster_endpoint_private_access
     endpoint_public_access  = var.cluster_endpoint_public_access
     public_access_cidrs     = var.cluster_endpoint_public_access_cidrs

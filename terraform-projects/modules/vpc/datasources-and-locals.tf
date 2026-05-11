@@ -22,18 +22,18 @@ data "aws_internet_gateway" "igw" {
   }
 }
 
-# data "aws_nat_gateways" "nat" {
-#   filter {
-#     name   = "tag:Name"
-#     values = ["Bootcamp-vpc-do-not-delete-nat"]
-#   }
+data "aws_nat_gateways" "nat" {
+  filter {
+    name   = "tag:Name"
+    values = ["Bootcamp-vpc-nat-jenil"]
+  }
 
-#   filter {
-#     name   = "state"
-#     values = ["available"]
-#   }
-# }
+  filter {
+    name   = "state"
+    values = ["available"]
+  }
+}
 
-# locals {
-#   nat_gateway_id = data.aws_nat_gateways.nat.ids[0]
-# }
+locals {
+  nat_gateway_id = data.aws_nat_gateways.nat.ids[0]
+}
