@@ -26,15 +26,10 @@ variable "private_subnet_cidr" {
 }
 
 variable "availability_zone" {
-  default = "ap-south-1a"
+  default = "ap-south-1"
 }
 
 #EKS
-# variable "aws_region" {
-#   description = "AWS region to deploy resources"
-#   type        = string
-#   default     = "ap-south-1"
-# }
 
 variable "environment_name" {
   description = "Environment name used in resource names and tags"
@@ -45,7 +40,7 @@ variable "environment_name" {
 variable "business_division" {
   description = "Business Division in the large organization this infrastructure belongs to"
   type        = string
-  default     = "retail"
+  default     = "jenil"
 }
 
 #eks
@@ -86,22 +81,8 @@ variable "cluster_endpoint_public_access" {
 variable "cluster_endpoint_public_access_cidrs" {
   description = "List of CIDR blocks allowed to access public EKS endpoint"
   type        = list(string)
-  default     = ["0.0.0.0/0"]
+  default     = ["103.240.204.126/32"]
 }
-
-
-# variable "tags" {
-#   description = "Global tags to apply to all resources"
-#   type        = map(string)
-#   default = {
-#     Owner       = "jenil"
-#     Department  = "PES"
-#     ProjectName = "EIC Internal"
-#     EndDate     = "EOD"
-#     BU          = "IA"
-#     Env         = "Dev"
-#   }
-# }
 
 # EKS Node Group Configuration
 variable "node_instance_types" {

@@ -13,7 +13,7 @@ variable "environment_name" {
 variable "business_division" {
   description = "Business Division in the large organization this infrastructure belongs to"
   type        = string
-  default     = "retail"
+  default     = "jenil"
 }
 
 #eks
@@ -90,4 +90,12 @@ variable "node_disk_size" {
   description = "Disk size in GiB for worker nodes"
   type        = number
   default     = 20
+}
+
+variable "private_subnet_id" {
+  type = string
+}
+
+variable "public_subnet_id" {
+  type = string
 }

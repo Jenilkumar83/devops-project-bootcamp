@@ -1,7 +1,7 @@
 resource "aws_subnet" "public" {
   vpc_id                  = data.aws_vpc.existing.id
   cidr_block              = var.public_subnet_cidr
-  availability_zone       = var.availability_zone
+  availability_zone       = "${var.availability_zone}a"
   map_public_ip_on_launch = true
 
   tags = merge(var.tags, {
@@ -12,7 +12,7 @@ resource "aws_subnet" "public" {
 resource "aws_subnet" "private" {
   vpc_id            = data.aws_vpc.existing.id
   cidr_block        = var.private_subnet_cidr
-  availability_zone = var.availability_zone
+  availability_zone = "${var.availability_zone}b"
 
   tags = merge(var.tags, {
     Name = "jenil-12-priv-subnet"
@@ -35,10 +35,10 @@ resource "aws_route_table" "public" {
 resource "aws_route_table" "private" {
   vpc_id = data.aws_vpc.existing.id
 
-  # route {
-  #   cidr_block = "0.0.0.0/0"
-  #   # nat_gateway_id = local.nat_gateway_id
-  # }
+  route {
+    cidr_block = "0.0.0.0/0"
+    nat_gateway_id = local.nat_gateway_id
+  }
 
   tags = merge(var.tags, {
     Name = "jenil-12-priv-rt"
