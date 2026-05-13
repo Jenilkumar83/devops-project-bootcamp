@@ -25,7 +25,7 @@ data "aws_internet_gateway" "igw" {
 data "aws_nat_gateways" "nat" {
   filter {
     name   = "tag:Name"
-    values = ["EIP_DevOps_BootCamp-jenil"]
+    values = ["vanbor_NAT_GW"]
   }
 
   filter {
