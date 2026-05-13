@@ -25,7 +25,7 @@ data "aws_internet_gateway" "igw" {
 data "aws_nat_gateways" "nat" {
   filter {
     name   = "tag:Name"
-    values = ["vanbor_NAT_GW"]
+    values = ["nat-jenil-demo"]
   }
 
   filter {
